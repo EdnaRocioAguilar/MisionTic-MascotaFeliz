@@ -29,7 +29,7 @@ namespace MascotaFeliz.App.Consola
             //AddVeterinario();
             //AddMascota();
             //GetAllDuenos();
-            BuscarMascota(2);
+            //BuscarMascota(2);
            //listarMascotas();
             
 
@@ -90,7 +90,7 @@ namespace MascotaFeliz.App.Consola
             {
                 //Cedula = "1212",
                 Nombres = "pedro",
-                Apellidos = "Sin Miedo",
+                Apellidos = "Muy Valiente",
                 Direccion = "Bajo un puente",
                 Telefono = "1234567891",
                 Correo = "juansinmiedo@gmail.com"

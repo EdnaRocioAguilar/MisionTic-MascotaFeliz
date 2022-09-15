@@ -1,8 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MascotaFeliz.App.Dominio;
 
-namespace MascotaFeliz.Adir
-p.Persistencia
+namespace MascotaFeliz.App.Persistencia
 
 {
 
@@ -38,4 +37,4 @@ p.Persistencia
 
     }
 
- }
+}
