@@ -12,12 +12,13 @@ namespace MascotaFeliz.App.Persistencia
         /// Referencia al contexto de Veterinario
         /// </summary>
         private readonly AppContext _appContext;
+
         /// <summary>
-        /// Metodo Constructor Utiiza 
+        /// Metodo Constructor Utiiza
+
         /// Inyeccion de dependencias para indicar el contexto a utilizar
         /// </summary>
         /// <param name="appContext"></param>//
-        
         public RepositorioVeterinario(AppContext appContext)
         {
             _appContext = appContext;
@@ -25,17 +26,20 @@ namespace MascotaFeliz.App.Persistencia
 
         public Veterinario AddVeterinario(Veterinario veterinario)
         {
-            var veterinarioAdicionado = _appContext.Veterinarios.Add(veterinario);
+            var veterinarioAdicionado =
+                _appContext.Veterinarios.Add(veterinario);
             _appContext.SaveChanges();
             return veterinarioAdicionado.Entity;
         }
 
         public void DeleteVeterinario(int idVeterinario)
         {
-            var veterinarioEncontrado = _appContext.Veterinarios.FirstOrDefault(d => d.Id == idVeterinario);
-            if (veterinarioEncontrado == null)
-                return;
-            _appContext.Veterinarios.Remove(veterinarioEncontrado);
+            var veterinarioEncontrado =
+                _appContext
+                    .Veterinarios
+                    .FirstOrDefault(d => d.Id == idVeterinario);
+            if (veterinarioEncontrado == null) return;
+            _appContext.Veterinarios.Remove (veterinarioEncontrado);
             _appContext.SaveChanges();
         }
 
@@ -47,11 +51,16 @@ namespace MascotaFeliz.App.Persistencia
         public IEnumerable<Veterinario> GetVeterinariosPorFiltro(string filtro)
         {
             var veterinarios = GetAllVeterinarios(); // Obtiene todos los saludos
-            if (veterinarios != null)  //Si se tienen saludos
+            if (
+                veterinarios != null //Si se tienen saludos
+            )
             {
-                if (!String.IsNullOrEmpty(filtro)) // Si el filtro tiene algun valor
+                if (
+                    !String.IsNullOrEmpty(filtro) // Si el filtro tiene algun valor
+                )
                 {
-                    veterinarios = veterinarios.Where(s => s.Nombres.Contains(filtro));
+                    veterinarios =
+                        veterinarios.Where(s => s.Nombres.Contains(filtro));
                 }
             }
             return veterinarios;
@@ -64,22 +73,28 @@ namespace MascotaFeliz.App.Persistencia
 
         public Veterinario GetVeterinario(int idVeterinario)
         {
-            return _appContext.Veterinarios.FirstOrDefault(d => d.Id == idVeterinario);
+            return _appContext
+                .Veterinarios
+                .FirstOrDefault(d => d.Id == idVeterinario);
         }
 
         public Veterinario UpdateVeterinario(Veterinario veterinario)
         {
-            var veterinarioEncontrado = _appContext.Veterinarios.FirstOrDefault(d => d.Id == veterinario.Id);
+            var veterinarioEncontrado =
+                _appContext
+                    .Veterinarios
+                    .FirstOrDefault(d => d.Id == veterinario.Id);
             if (veterinarioEncontrado != null)
             {
                 veterinarioEncontrado.Nombres = veterinario.Nombres;
                 veterinarioEncontrado.Apellidos = veterinario.Apellidos;
                 veterinarioEncontrado.Direccion = veterinario.Direccion;
                 veterinarioEncontrado.Telefono = veterinario.Telefono;
-                veterinarioEncontrado.TarjetaProfesional = veterinario.TarjetaProfesional;
+                veterinarioEncontrado.TarjetaProfesional =
+                    veterinario.TarjetaProfesional;
                 _appContext.SaveChanges();
             }
             return veterinarioEncontrado;
-        }     
+        }
     }
 }

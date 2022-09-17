@@ -12,12 +12,13 @@ namespace MascotaFeliz.App.Persistencia
         /// Referencia al contexto de Mascota
         /// </summary>
         private readonly AppContext _appContext;
+
         /// <summary>
-        /// Metodo Constructor Utiiza 
+        /// Metodo Constructor Utiiza
+
         /// Inyeccion de dependencias para indicar el contexto a utilizar
         /// </summary>
         /// <param name="appContext"></param>//
-        
         public RepositorioMascota(AppContext appContext)
         {
             _appContext = appContext;
@@ -32,24 +33,28 @@ namespace MascotaFeliz.App.Persistencia
 
         public void DeleteMascota(int idMascota)
         {
-            var mascotaEncontrado = _appContext.Mascotas.FirstOrDefault(d => d.Id == idMascota);
-            if (mascotaEncontrado == null)
-                return;
-            _appContext.Mascotas.Remove(mascotaEncontrado);
+            var mascotaEncontrado =
+                _appContext.Mascotas.FirstOrDefault(d => d.Id == idMascota);
+            if (mascotaEncontrado == null) return;
+            _appContext.Mascotas.Remove (mascotaEncontrado);
             _appContext.SaveChanges();
         }
 
-            public IEnumerable<Mascota> GetAllMascotas()
+        public IEnumerable<Mascota> GetAllMascotas()
         {
             return GetAllMascotas_();
         }
 
-        public IEnumerable<Mascota> GetMascotasPorFiltro(string filtro)   
+        public IEnumerable<Mascota> GetMascotasPorFiltro(string filtro)
         {
             var mascotas = GetAllMascotas(); // Obtiene todos los saludos
-            if (mascotas != null)  //Si se tienen saludos
+            if (
+                mascotas != null //Si se tienen saludos
+            )
             {
-                if (!String.IsNullOrEmpty(filtro)) // Si el filtro tiene algun valor
+                if (
+                    !String.IsNullOrEmpty(filtro) // Si el filtro tiene algun valor
+                )
                 {
                     mascotas = mascotas.Where(s => s.Nombre.Contains(filtro));
                 }
@@ -69,17 +74,18 @@ namespace MascotaFeliz.App.Persistencia
 
         public Mascota UpdateMascota(Mascota mascota)
         {
-            var mascotaEncontrado = _appContext.Mascotas.FirstOrDefault(d => d.Id == mascota.Id);
+            var mascotaEncontrado =
+                _appContext.Mascotas.FirstOrDefault(d => d.Id == mascota.Id);
             if (mascotaEncontrado != null)
             {
                 mascotaEncontrado.Nombre = mascota.Nombre;
                 mascotaEncontrado.Color = mascota.Color;
                 mascotaEncontrado.Especie = mascota.Especie;
                 mascotaEncontrado.Raza = mascota.Raza;
-                
+
                 _appContext.SaveChanges();
             }
             return mascotaEncontrado;
-        }     
+        }
     }
 }

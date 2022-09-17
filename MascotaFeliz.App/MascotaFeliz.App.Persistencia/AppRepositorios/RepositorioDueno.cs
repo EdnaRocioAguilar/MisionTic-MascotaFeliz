@@ -12,12 +12,13 @@ namespace MascotaFeliz.App.Persistencia
         /// Referencia al contexto de Dueno
         /// </summary>
         private readonly AppContext _appContext;
+
         /// <summary>
-        /// Metodo Constructor Utiiza 
+        /// Metodo Constructor Utiiza
+
         /// Inyeccion de dependencias para indicar el contexto a utilizar
         /// </summary>
         /// <param name="appContext"></param>//
-        
         public RepositorioDueno(AppContext appContext)
         {
             _appContext = appContext;
@@ -32,10 +33,10 @@ namespace MascotaFeliz.App.Persistencia
 
         public void DeleteDueno(int idDueno)
         {
-            var duenoEncontrado = _appContext.Duenos.FirstOrDefault(d => d.Id == idDueno);
-            if (duenoEncontrado == null)
-                return;
-            _appContext.Duenos.Remove(duenoEncontrado);
+            var duenoEncontrado =
+                _appContext.Duenos.FirstOrDefault(d => d.Id == idDueno);
+            if (duenoEncontrado == null) return;
+            _appContext.Duenos.Remove (duenoEncontrado);
             _appContext.SaveChanges();
         }
 
@@ -47,9 +48,13 @@ namespace MascotaFeliz.App.Persistencia
         public IEnumerable<Dueno> GetDuenosPorFiltro(string filtro)
         {
             var duenos = GetAllDuenos(); // Obtiene todos los saludos
-            if (duenos != null)  //Si se tienen saludos
+            if (
+                duenos != null //Si se tienen saludos
+            )
             {
-                if (!String.IsNullOrEmpty(filtro)) // Si el filtro tiene algun valor
+                if (
+                    !String.IsNullOrEmpty(filtro) // Si el filtro tiene algun valor
+                )
                 {
                     duenos = duenos.Where(s => s.Nombres.Contains(filtro));
                 }
@@ -69,7 +74,8 @@ namespace MascotaFeliz.App.Persistencia
 
         public Dueno UpdateDueno(Dueno dueno)
         {
-            var duenoEncontrado = _appContext.Duenos.FirstOrDefault(d => d.Id == dueno.Id);
+            var duenoEncontrado =
+                _appContext.Duenos.FirstOrDefault(d => d.Id == dueno.Id);
             if (duenoEncontrado != null)
             {
                 duenoEncontrado.Nombres = dueno.Nombres;
@@ -80,6 +86,6 @@ namespace MascotaFeliz.App.Persistencia
                 _appContext.SaveChanges();
             }
             return duenoEncontrado;
-        }     
+        }
     }
 }
